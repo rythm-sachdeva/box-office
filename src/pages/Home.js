@@ -1,28 +1,19 @@
 import { useState } from "react"
 import { searchForPeople, searchForShows } from "../api/Tvmaze";
 import ApiError from "../utils/ApiError";
+import SearchForm from "../components/SearchForm";
 
 
 
 function Home() {
-const [searchState,setSearchState] = useState(null)
 const [apidata,setApidata] = useState(null)
 const [apierror,setApierror] = useState("")
-const [searchOptions,setSearchOptions] = useState("shows")
 
 // console.log(searchOptions)
 
-const onRadioChange = (ev) => {
-  setSearchOptions(ev.target.value)
-  
-}
 
-const searchInput = (e) => {
-  setSearchState(e.target.value)
-}
 
-const onSearch = async (ev) => {
-  ev.preventDefault();
+const onSearch = async (searchOptions,searchState) => {
 
   try {
     if(searchOptions === "shows")
@@ -68,20 +59,7 @@ const renderdata = () =>{
 
   return (
     <div>
-     <form onSubmit={onSearch}>
-     <input type="text" onChange={searchInput}/>
-      <button type="submit">Search</button>
-
-      <label>
-        Shows
-        <input type="radio" name="search-shows" value="shows" checked={searchOptions === "shows"} onChange={onRadioChange}/>
-      </label>
-
-      <label>
-        Actors
-        <input type="radio" name="search-shows" value="actors" checked={searchOptions === "actors"} onChange={onRadioChange}/>
-      </label>
-     </form>
+     <SearchForm  onSearch={onSearch}/>
      <div>
       {renderdata()}
      </div>
