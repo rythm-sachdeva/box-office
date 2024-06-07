@@ -3,9 +3,7 @@
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:react/jsx-runtime",
-      "prettier",
-      "@babel/plugin-transform-private-property-in-object", 
-      "next/core-web-vitals"
+      "prettier"
     ],
     "plugins": ["react-hooks"],
     "env": {

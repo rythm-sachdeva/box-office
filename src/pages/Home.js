@@ -2,6 +2,8 @@ import { useState } from "react"
 import { searchForPeople, searchForShows } from "../api/Tvmaze";
 import ApiError from "../utils/ApiError";
 import SearchForm from "../components/SearchForm";
+import ShowGrid from "../components/Shows/ShowGrid";
+import ActorsGrid from "../components/Actors/ActorsGrid";
 
 
 
@@ -19,6 +21,7 @@ const onSearch = async (searchOptions,searchState) => {
     if(searchOptions === "shows")
       {
         const body = await searchForShows(searchState)
+        console.log(body)
         setApidata(body)
       }
       else {
@@ -41,17 +44,10 @@ const renderdata = () =>{
     {
      if(apidata[0].show)
       {
-        return apidata.map((item)=>
-          <div key={item.show.id}>
-           {item.show.name}
-          </div>
-         )
+        return <ShowGrid apidata={apidata}/>
+         
       }
-     else {return apidata.map((item)=>
-        <div key={item.person.id}>
-         {item.person.name}
-        </div>
-       )
+     else {return <ActorsGrid apidata={apidata}/>
       }
     }
 
