@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
 
-const ShowCard = ({name,image,id,summary}) => {
+
+const ShowCard = ({name,image,id,summary,onStarmeClick}) => {
     // console.log(image)
     const strippedString = summary ?summary.split(" ").slice(0,10).join(" ").replace(/<.+?>/g,""):"NO Summary Present";
 
@@ -15,8 +15,8 @@ const ShowCard = ({name,image,id,summary}) => {
     </h1>
     
     <div>
-        <Link to={`/show/${id}`}>Read More</Link>
-        <button type="button">StarMe</button>
+        <a href={`/show/${id}`} target="_blank" rel="noreferrer" >Read More</a>
+        <button type="button" onClick={()=>onStarmeClick(id)}>StarMe</button>
      </div>
 
      <p> 

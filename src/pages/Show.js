@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getShowsById } from '../api/Tvmaze';
 import ShowMainData from '../components/Shows/ShowMainData';
 import Details from '../components/Shows/Details.js';
@@ -12,12 +12,16 @@ const Show = () => {
     queryKey: ['showId', showId],
     queryFn: () => getShowsById(showId),
   });
+
+ 
   if (showError) {
     return <div>We Have an Error {showError.message}</div>;
   }
   if (showData) {
     return (
       <div>
+
+        <Link to="/">Got to Home</Link>
         <ShowMainData
           image={showData.image}
           name={showData.name}
