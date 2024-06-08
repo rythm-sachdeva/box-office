@@ -14,7 +14,8 @@ function Home() {
   const {data: apidata, error:apierror} = useQuery({
     queryKey:['search',filter],
     queryFn: () => filter.searchOptions==="shows"? searchForShows(filter.q) : searchForPeople(filter.q),
-    enabled: !!filter
+    enabled: !!filter,
+    refetchOnWindowFocus: false
   })
 
 
