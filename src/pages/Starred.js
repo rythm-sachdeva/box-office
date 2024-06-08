@@ -1,8 +1,10 @@
+import { useStarredShows } from "../utils/useStarredShows"
 
 
 function Starred() {
+  const [starredShow] = useStarredShows();
   return (
-    <div>Starred</div>
+    <div>Starred hows are {starredShow.length}</div>
   )
 }
 
