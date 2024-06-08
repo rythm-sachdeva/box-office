@@ -2,27 +2,18 @@ import { useStarredShows } from '../../utils/useStarredShows';
 import ShowCard from './ShowCard';
 
 const ShowGrid = ({ apidata }) => {
+  const [starredShow, dispatchStarredShow] = useStarredShows();
+
+  const onStarmeClick = showId => {
+    const isStarred = starredShow.includes(showId);
   
 
-
-  
-
-  const [starredShow, dispatchStarredShow] = useStarredShows()
-
-  const onStarmeClick = (showId) =>{
-
-    const isStarred = starredShow.includes(showId)
-    console.log(starredShow)
-
-    if(isStarred)
-      {
-        dispatchStarredShow({type:'unstar', showId})
-      }
-      else{
-        dispatchStarredShow({type:'star', showId})
-      }
-
-  }
+    if (isStarred) {
+      dispatchStarredShow({ type: 'unstar', showId });
+    } else {
+      dispatchStarredShow({ type: 'star', showId });
+    }
+  };
 
   return (
     <div>

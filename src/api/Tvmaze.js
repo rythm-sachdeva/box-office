@@ -18,3 +18,9 @@ export const searchForShows = (query) => Tvmaze(`/search/shows?q=${query}`)
 export const searchForPeople = (query) => Tvmaze(`/search/people?q=${query}`)
 
 export const getShowsById = (showId) => Tvmaze(`/shows/${showId}?embed[]=seasons&embed[]=cast`)
+
+export const getShowsByIds = async (starredShow) => {
+  const apiRequestPromises = starredShow.map((showId)=> getShowsById(showId))
+  const result = await Promise.all(apiRequestPromises)
+  return result
+}
