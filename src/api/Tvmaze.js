@@ -16,3 +16,5 @@ const Tvmaze = async queryString => {
 export const searchForShows = (query) => Tvmaze(`/search/shows?q=${query}`)
 
 export const searchForPeople = (query) => Tvmaze(`/search/people?q=${query}`)
+
+export const getShowsById = (showId) => Tvmaze(`/shows/${showId}`)
