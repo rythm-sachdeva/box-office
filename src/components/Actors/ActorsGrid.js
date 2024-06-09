@@ -1,8 +1,14 @@
 import ActorsCard from './ActorsCard';
+import { FlexGrid } from '../common/FlexGrid';
+import { TextCenter } from '../common/TextCenter';
 
 const ActorsGrid = ({ apidata }) => {
+  if(apidata.length === 0)
+    {
+      return <TextCenter>No Data Found</TextCenter>
+    }
   return (
-    <div>
+    <FlexGrid>
       {apidata.map(item => (
         <ActorsCard
           key={item.person.id}
@@ -13,7 +19,7 @@ const ActorsGrid = ({ apidata }) => {
           gender={item.person.gender || 'Not Known'}
         />
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 

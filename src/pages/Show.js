@@ -5,6 +5,8 @@ import ShowMainData from '../components/Shows/ShowMainData';
 import Details from '../components/Shows/Details.js';
 import Seasons from '../components/Shows/Seasons.js';
 import Cast from '../components/Shows/Cast.js';
+import styled from 'styled-components';
+import { TextCenter } from '../components/common/TextCenter.js';
 
 const Show = () => {
   const { showId } = useParams();
@@ -15,13 +17,13 @@ const Show = () => {
 
  
   if (showError) {
-    return <div>We Have an Error {showError.message}</div>;
+    return <TextCenter>We Have an Error {showError.message}</TextCenter>;
   }
   if (showData) {
     return (
-      <div>
+      <ShowPageWrapper>
 
-        <Link to="/">Got to Home</Link>
+        <BackHomeWrapper><Link to="/">Got to Home</Link></BackHomeWrapper>
         <ShowMainData
           image={showData.image}
           name={showData.name}
@@ -29,26 +31,58 @@ const Show = () => {
           geners={showData.genres}
           summary={showData.summary}
         />
-        <div>
+        <InfoBlock>
           <h2>Details</h2>
           <Details
             status={showData.status}
             premiered={showData.premiered}
             network={showData.network}
           />
-        </div>
-        <div>
+        </InfoBlock>
+        <InfoBlock>
           <h2>Seasons</h2>
           <Seasons seasons={showData._embedded.seasons}/>
-        </div>
-        <div>
+        </InfoBlock>
+        <InfoBlock>
           <h2>Cast</h2>
           <Cast cast={showData._embedded.cast}/>
-        </div>
-      </div>
+        </InfoBlock>
+      </ShowPageWrapper>
     );
   }
-  return <div>Data Is Loading....</div>;
+  return <TextCenter>Data Is Loading....</TextCenter>;
 };
 
 export default Show;
+
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
+
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;
